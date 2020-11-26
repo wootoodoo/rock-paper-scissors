@@ -1,0 +1,80 @@
+<script>
+function playRound(playerSelection, computerSelection, score) {
+    playerSelection =  playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+    var result; // 0 = lose, 1 = win, 2 = draw
+    if (playerSelection == "Rock") {
+        if (computerSelection == "Paper") {
+            result = 0;
+        }
+        else if (computerSelection == "Scissors") {
+            result = 1;
+        } 
+        else {
+            result = 2;
+        }
+    }
+    else if (playerSelection == "Paper") {
+        if (computerSelection == "Scissors") {
+            result = 0;
+        }
+        else if (computerSelection == "Rock") {
+            result = 1;
+        }
+        else {
+            result = 2;
+        }
+    }
+    else {
+        if (computerSelection == "Rock") {
+            result = 0;
+        }
+        else if (computerSelection == "Paper") {
+            result = 1;
+        }
+        else {
+            result = 2;
+        }
+    }
+    if (result == 0) {
+        return ["You Lose! " + computerSelection + " beats " + playerSelection, score];
+    }
+    else if (result == 1) {
+        score += 1;
+        return ["You Win! " + playerSelection + " beats " + computerSelection, score];
+    }
+    else {
+        score += 1;
+        return ["You Draw!", score];
+    }
+  }
+  
+function computerPlay() {
+    let num = Math.floor(Math.random() * 1000);
+    if (num % 3 == 0) {
+        return "Rock";
+    }
+    else if (num % 3 == 1) {
+        return "Paper";
+    }
+    else {
+        return "Scissors";
+    }
+}
+
+function game() {
+    let score = 0
+    for (let i = 1; i < 6; i++) {
+        const playerSelection = prompt("Enter either Rock, Paper or Scissors: ");
+        const computerSelection = computerPlay();
+        console.log("Round " + i);
+        let results = playRound(playerSelection, computerSelection, score);
+        score = results[1];
+        console.log(results[0]);
+    }
+    if (score >= 3) console.log("You won! With a score of: " + score);
+    else console.log("You Lost! With a score of: " + score);
+}
+
+game();
+  
+</script>
